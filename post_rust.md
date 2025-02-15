@@ -31,6 +31,10 @@ fn find_max_index<T: PartialOrd>(buffer: &[T]) -> Option<usize> {
     let mut left = 0;
     let mut right = buffer.len() - 1;
 
+    if buffer[left] <= buffer[right] {
+      return Some(right);
+    }
+
     while left < right {
         let mid = (left + right) / 2;
         if buffer[mid] > buffer[right] {
