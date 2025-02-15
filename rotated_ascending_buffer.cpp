@@ -15,6 +15,7 @@ size_t RotatedAscendingBufferUtils::find_max_index(RotatedAscendingBufferWrapper
     int left_index = 0;
     int right_index = buffer_size - 1;
 
+    // cache values locally
     uint32_t left_value = buffer.get_value(left_index);
     uint32_t right_value = buffer.get_value(right_index);
     
@@ -23,7 +24,7 @@ size_t RotatedAscendingBufferUtils::find_max_index(RotatedAscendingBufferWrapper
         return right_index;
     }
 
-    // find max element
+    // find the pivot element
     while (left_index < right_index) {
 
         // find middle elements prenting integer overflows
@@ -43,5 +44,6 @@ size_t RotatedAscendingBufferUtils::find_max_index(RotatedAscendingBufferWrapper
         }
     }
     
-    return (left_index + buffer_size - 1) % buffer_size;
+    // return index of max element
+    return (left_index == 0) ? buffer_size-1 : left_index-1;
 }
