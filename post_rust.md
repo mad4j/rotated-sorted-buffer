@@ -1,6 +1,6 @@
 ### Finding the Maximum Value in a Rotated Sorted Buffer with Rust
 
-When dealing with a rotated sorted buffer, the challenge lies in finding elements efficiently. Here, we'll explore an algorithm to find the index of the maximum value stored in such a buffer, using Rust for code examples and test cases, ensuring the input parameter is a `Vec<T>` where `T` satisfies the `PartialOrd` trait and the function returns `Option<usize>`.
+When dealing with a rotated sorted buffer, the challenge lies in finding elements efficiently. Here, we'll explore an algorithm to find the index of the maximum value stored in such a buffer, using Rust for code examples and test cases.
 
 #### Concept
 
