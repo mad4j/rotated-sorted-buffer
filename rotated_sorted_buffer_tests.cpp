@@ -35,7 +35,7 @@ class ArrayRABWrapper : public RotatedSortedBufferWrapper {
     
     
     int32_t ArrayRABWrapper::get_size() const {
-        return _buffer_size;
+        return (_buffer_size <= _buffer_capacity) ? _buffer_size : RSB_ERROR;
     }
     
     
@@ -49,6 +49,16 @@ class ArrayRABWrapper : public RotatedSortedBufferWrapper {
         size_t buffer_size = 0;
     
         ArrayRABWrapper w = ArrayRABWrapper(buffer, buffer_size, buffer_size);
+        int result = RotatedSortedBufferUtils::find_max_index(w);
+    
+        ASSERT_EQ(result, RSB_ERROR);
+    }
+
+    UTEST(find_max, error_get_size) {
+        uint32_t buffer[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        size_t buffer_size = 10;
+    
+        ArrayRABWrapper w = ArrayRABWrapper(buffer, buffer_size, buffer_size+1);
         int result = RotatedSortedBufferUtils::find_max_index(w);
     
         ASSERT_EQ(result, RSB_ERROR);
