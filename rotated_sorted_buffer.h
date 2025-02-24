@@ -1,8 +1,13 @@
 #ifndef _ROTATED_SORTED_BUFFER_H
 #define _ROTATED_SORTED_BUFFER_H
 
-#include <cstddef>
 #include <cstdint>
+
+/**
+* @brief Generic library error code
+*/
+static int32_t RSB_ERROR = -1;
+
 
 /**
  * @brief Abstract base class for a rotated sorted buffer.
@@ -17,14 +22,14 @@ public:
      * @brief Get the number of elements in the buffer.
      * @return The number of elements in the buffer.
      */
-    virtual size_t get_size() const = 0;
+    virtual int32_t get_size() const = 0;
 
     /**
      * @brief Get the value of the element at the given index.
      * @param index The index of the requested element.
      * @return The value of the element at the given index.
      */
-    virtual uint32_t get_value(size_t index) const = 0;
+    virtual int32_t get_value(uint32_t index) const = 0;
 };
     
 /**
@@ -38,7 +43,7 @@ public:
      * @param buffer The buffer to search.
      * @return The index of the maximum element in the buffer.
      */
-    static size_t find_max_index(RotatedSortedBufferWrapper& buffer);
+    static int32_t find_max_index(RotatedSortedBufferWrapper& buffer);
 };
     
 

@@ -13,8 +13,8 @@ class ArrayRABWrapper : public RotatedSortedBufferWrapper {
         ArrayRABWrapper(const uint32_t* buffer, size_t buffer_capacity, size_t buffer_size);
         virtual ~ArrayRABWrapper();
     
-        size_t get_size() const;
-        uint32_t get_value(size_t entry) const;
+        int32_t get_size() const;
+        int32_t get_value(uint32_t entry) const;
     
     private:
         const uint32_t* _buffer;
@@ -34,13 +34,13 @@ class ArrayRABWrapper : public RotatedSortedBufferWrapper {
     }
     
     
-    size_t ArrayRABWrapper::get_size() const {
+    int32_t ArrayRABWrapper::get_size() const {
         return _buffer_size;
     }
     
     
-    uint32_t ArrayRABWrapper::get_value(size_t entry) const {
-        return _buffer[entry % _buffer_capacity];
+    int32_t ArrayRABWrapper::get_value(uint32_t entry) const {
+        return (entry < _buffer_capacity) ? _buffer[entry] : RSB_ERROR;
     }
     
     
@@ -51,7 +51,7 @@ class ArrayRABWrapper : public RotatedSortedBufferWrapper {
         ArrayRABWrapper w = ArrayRABWrapper(buffer, buffer_size, buffer_size);
         int result = RotatedSortedBufferUtils::find_max_index(w);
     
-        ASSERT_EQ(result, 0);
+        ASSERT_EQ(result, RSB_ERROR);
     }
     
     UTEST(find_max, single_element) {

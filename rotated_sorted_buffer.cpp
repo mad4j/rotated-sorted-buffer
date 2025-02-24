@@ -1,14 +1,14 @@
 
 #include "rotated_sorted_buffer.h"
 
-size_t RotatedSortedBufferUtils::find_max_index(RotatedSortedBufferWrapper& buffer) {
+int32_t RotatedSortedBufferUtils::find_max_index(RotatedSortedBufferWrapper& buffer) {
 
     // cache buffer size locally
-    size_t buffer_size = buffer.get_size(); 
+    int32_t buffer_size = buffer.get_size(); 
 
     // no elements in buffer
-    if (buffer_size == 0) {
-        return 0;
+    if (buffer_size <= 0) {
+        return RSB_ERROR;
     }
 
     // starting buffer boundaries
@@ -16,8 +16,14 @@ size_t RotatedSortedBufferUtils::find_max_index(RotatedSortedBufferWrapper& buff
     int right_index = buffer_size - 1;
 
     // cache values locally
-    uint32_t left_value = buffer.get_value(left_index);
-    uint32_t right_value = buffer.get_value(right_index);
+    int32_t left_value = buffer.get_value(left_index);
+    if (left_value < 0) {
+        return RSB_ERROR;
+    }
+    int32_t right_value = buffer.get_value(right_index);
+    if (right_value < 0) {
+        return RSB_ERROR;
+    }
     
     // not rotated array
     if (left_value <= right_value) {
@@ -32,6 +38,9 @@ size_t RotatedSortedBufferUtils::find_max_index(RotatedSortedBufferWrapper& buff
     
         // cache values locally
         uint32_t mid_value = buffer.get_value(mid_index);
+        if (mid_value < 0) {
+            return RSB_ERROR;
+        }
       
         // otherwise narrowing search range
         if (mid_value > right_value) {
@@ -41,6 +50,9 @@ size_t RotatedSortedBufferUtils::find_max_index(RotatedSortedBufferWrapper& buff
             // max value in upper range
             right_index = mid_index;
             right_value = buffer.get_value(right_index);
+            if (right_value < 0) {
+                return RSB_ERROR;
+            }
         }
     }
     
