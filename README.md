@@ -1,6 +1,6 @@
-# rotated-ascending-buffer
+# rotated-sorted-buffer
 
-Find max value in a rotated ascending buffer
+Find max value in a rotated sorted of buffer
 
 ```text
   Original (Sorted)                                            Rotated (Rotated Ascending Buffer)
